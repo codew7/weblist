@@ -42,8 +42,8 @@
             justify-content: space-between;
             align-items: center;
             margin: 20px auto;
-            max-width: 100%;
-            gap: 20px; /* Separación de 20px entre los elementos */
+            max-width: 90%;
+            gap: 20px;
         }
 
         select, input, button {
@@ -54,7 +54,7 @@
         }
 
         select, input {
-            width: 70%; /* Ancho fijo para select y input */
+            width: 70%;
         }
 
         button {
@@ -108,6 +108,23 @@
 
         img:hover {
             transform: scale(1.1);
+        }
+
+        /* Configuración de anchos porcentuales para las columnas */
+        th:nth-child(1), td:nth-child(1) {
+            width: 15%; /* Categoría */
+        }
+        th:nth-child(2), td:nth-child(2) {
+            width: 25%; /* Imagen */
+        }
+        th:nth-child(3), td:nth-child(3) {
+            width: 15%; /* Código */
+        }
+        th:nth-child(4), td:nth-child(4) {
+            width: 30%; /* Artículo */
+        }
+        th:nth-child(5), td:nth-child(5) {
+            width: 15%; /* Valor */
         }
 
         /* Ocultar columna de categoría */
@@ -165,6 +182,7 @@
         </select>
         <input type="text" id="buscar" placeholder="Buscar artículo...">
         <button id="novedades">Novedades</button>
+        <button id="todos">Todos</button>
     </div>
 
     <p id="error" style="text-align: center; color: red; font-weight: bold;"></p>
@@ -238,6 +256,10 @@
                         .sort((a, b) => b[2] - a[2]) // Ordenar por código (campo 2)
                         .slice(0, 20); // Tomar los primeros 20
                     cargarTabla(novedades);
+                });
+
+                document.getElementById('todos').addEventListener('click', () => {
+                    cargarTabla(productos);
                 });
             })
             .catch(error => {
