@@ -32,12 +32,17 @@
             font-size: 24px;
         }
 
+        header h2 {
+            margin: 0;
+            font-size: 30px;
+        }
+
         .controls {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin: 20px auto;
-            max-width: 800px;
+            max-width: 1000px;
             gap: 30px; /* Separación de 30px entre los elementos */
         }
 
@@ -49,7 +54,7 @@
         }
 
         select, input {
-            width: 350px; /* Ancho fijo para select y input */
+            width: 300px; /* Ancho fijo para select y input */
         }
 
         button {
@@ -149,7 +154,7 @@
     <header>
         <div>
             <h1>Mundo Hogareño</h1>
-            <h1>Catálogo de Artículos</h1>
+            <h2>Catálogo de Artículos</h2>
         </div>
     </header>
 
@@ -180,7 +185,7 @@
 
     <!-- Lightbox para imágenes -->
     <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
-        <span class="close" onclick="closeLightbox(event)">X</span>
+        <span class="close" onclick="closeLightbox(event)">x</span>
         <img id="lightbox-img" src="" alt="Imagen ampliada">
     </div>
 
