@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        img.logo {
+            max-width: 250px;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input[type="text"], input[type="password"] {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Logo de la página -->
+        <img src="logo.png" alt="Logo" class="logo">
+        <h1>Bienvenido</h1>
+        <p>Por favor, inicie sesión para continuar.</p>
+        <form id="login-form">
+            <input type="text" id="username" placeholder="Usuario" required>
+            <input type="password" id="password" placeholder="Contraseña" required>
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+        <p id="error-message" class="error"></p>
+    </div>
+
+    <script>
+        // Credenciales predeterminadas (puedes reemplazarlas con datos dinámicos)
+        const USUARIO_CORRECTO = "admin";
+        const CONTRASENA_CORRECTA = "1234";
+
+        document.getElementById("login-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Evitar el envío del formulario
+
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Verificación básica
+            if (username === USUARIO_CORRECTO && password === CONTRASENA_CORRECTA) {
+                // Redirigir a la página del catálogo
+                window.location.href = "catalogo.html"; // Cambia el nombre del archivo si es necesario
+            } else {
+                // Mostrar mensaje de error
+                document.getElementById("error-message").textContent = "Usuario o contraseña incorrectos.";
+            }
+        });
+    </script>
+
+</body>
+</html>
