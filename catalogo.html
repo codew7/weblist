@@ -39,11 +39,16 @@
 
         .controls {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            gap: 20px;
             margin: 20px auto;
             max-width: 90%;
-            gap: 20px;
+        }
+
+        .controls-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
         }
 
         select, input, button {
@@ -54,11 +59,11 @@
         }
 
         select, input {
-            width: 70%;
+            width: 60%;
         }
 
         button {
-            width: 20%;
+            width: 30%;
             background-color: #4CAF50;
             color: white;
             cursor: pointer;
@@ -70,7 +75,7 @@
         }
 
         table {
-            width: 95%;
+            width: 90%;
             margin: 20px auto;
             border-collapse: collapse;
             background-color: #fff;
@@ -99,8 +104,8 @@
         }
 
         img {
-            max-width: 90%;
-            max-height: 90%;
+            max-width: 70px;
+            max-height: 70px;
             border-radius: 5px;
             cursor: pointer;
             transition: transform 0.2s;
@@ -108,23 +113,6 @@
 
         img:hover {
             transform: scale(1.1);
-        }
-
-        /* Configuración de anchos porcentuales para las columnas */
-        th:nth-child(1), td:nth-child(1) {
-            width: 0%; /* Categoría */
-        }
-        th:nth-child(2), td:nth-child(2) {
-            width: 30%; /* Imagen */
-        }
-        th:nth-child(3), td:nth-child(3) {
-            width: 10%; /* Código */
-        }
-        th:nth-child(4), td:nth-child(4) {
-            width: 40%; /* Artículo */
-        }
-        th:nth-child(5), td:nth-child(5) {
-            width: 10%; /* Valor */
         }
 
         /* Ocultar columna de categoría */
@@ -177,12 +165,16 @@
     </header>
 
     <div class="controls">
-        <select id="categorias">
-            <option value="todos">Todas las categorías</option>
-        </select>
-        <input type="text" id="buscar" placeholder="Buscar artículo...">
-        <button id="novedades">Novedades</button>
-        <button id="todos">Todos</button>
+        <div class="controls-row">
+            <select id="categorias">
+                <option value="todos">Todas las categorías</option>
+            </select>
+            <button id="novedades">Novedades</button>
+        </div>
+        <div class="controls-row">
+            <input type="text" id="buscar" placeholder="Buscar artículo...">
+            <button id="todos">Todos</button>
+        </div>
     </div>
 
     <p id="error" style="text-align: center; color: red; font-weight: bold;"></p>
@@ -191,10 +183,10 @@
         <thead>
             <tr>
                 <th class="oculto">Categoría</th>
-                <th>Imagen</th>
-                <th>Código</th>
-                <th>Artículo</th>
-                <th>Valor</th>
+                <th style="width: 20%;">Imagen</th>
+                <th style="width: 20%;">Código</th>
+                <th style="width: 40%;">Artículo</th>
+                <th style="width: 20%;">Valor</th>
             </tr>
         </thead>
         <tbody>
