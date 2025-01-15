@@ -74,32 +74,32 @@
     	gap: 10px;
     	padding: 10px;
     	justify-content: center;
-	margin: 20px 20px; /* 50px de margen en los lados */
+	margin: 50px 50px; /* 50px de margen en los lados */
 	}
 
-/* Pantalla pequeña (móviles): 2 recuadros por fila */
-@media (max-width: 600px) {
-    .grid {
-        grid-template-columns: repeat(2, 1fr);
-	max-width: 90%;
-    }
-}
+	/* Pantalla pequeña (móviles): 2 recuadros por fila */
+	@media (max-width: 600px) {
+	    .grid {
+	        grid-template-columns: repeat(2, 1fr);
+		max-width: 90%;
+	    }
+		}
 
-/* Pantalla mediana: 3 recuadros por fila */
-@media (min-width: 601px) and (max-width: 1024px) {
-    .grid {
-        grid-template-columns: repeat(3, 1fr);
-	    max-width: 90%;
-    }
-}
+	/* Pantalla mediana: 3 recuadros por fila */
+	@media (min-width: 601px) and (max-width: 1024px) {
+	    .grid {
+	        grid-template-columns: repeat(3, 1fr);
+		    max-width: 90%;
+   	 }
+	}
 
-/* Pantalla grande: hasta 5 recuadros por fila */
-@media (min-width: 1025px) {
-    .grid {
-        grid-template-columns: repeat(5, 1fr);
-	    max-width: 90%;
-    }
-}
+	/* Pantalla grande: hasta 5 recuadros por fila */
+	@media (min-width: 1025px) {
+	    .grid {
+   	     grid-template-columns: repeat(5, 1fr);
+		    max-width: 90%;
+  	  }
+	}
 
 
         .card {
