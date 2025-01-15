@@ -69,14 +69,31 @@
             background-color: #45a049;
         }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            padding: 20px;
-            max-width: 90%;
-            margin: 0 auto;
-        }
+		.grid {
+		display: grid;
+		gap: 20px;
+		padding: 20px;
+		justify-content: center;
+		}
+
+		@media (max-width: 600px) { /* Pantalla pequeña (móviles): 2 recuadros por fila */
+			.grid {
+        grid-template-columns: repeat(2, 1fr);
+		}
+		}
+		
+		@media (min-width: 601px) and (max-width: 1024px) { /* Pantalla mediana: 3 recuadros por fila */
+		.grid {
+        grid-template-columns: repeat(3, 1fr);
+		}
+		}
+
+		@media (min-width: 1025px) { /* Pantalla grande: hasta 5 recuadros por fila */
+		.grid {
+        grid-template-columns: repeat(5, 1fr);
+		}
+		}
+
 
         .card {
             background-color: #fff;
