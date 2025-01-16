@@ -75,9 +75,13 @@
     </div>
 
     <script>
-        // Credenciales predeterminadas (puedes reemplazarlas con datos dinámicos)
-        const USUARIO_CORRECTO = "admin";
-        const CONTRASENA_CORRECTA = "1234";
+        // Credenciales codificadas en Base64
+        const USUARIO_CODIFICADO = "YWRtaW4="; // "admin"
+        const CONTRASENA_CODIFICADA = "MTIzNA=="; // "1234"
+
+        function decodeBase64(codigo) {
+            return atob(codigo);
+        }
 
         document.getElementById("login-form").addEventListener("submit", function(event) {
             event.preventDefault(); // Evitar el envío del formulario
@@ -85,8 +89,13 @@
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
 
-            // Verificación básica
-            if (username === USUARIO_CORRECTO && password === CONTRASENA_CORRECTA) {
+            // Decodificar y verificar credenciales
+            const usuarioCorrecto = decodeBase64(USUARIO_CODIFICADO);
+            const contrasenaCorrecta = decodeBase64(CONTRASENA_CODIFICADA);
+
+            if (username === usuarioCorrecto && password === contrasenaCorrecta) {
+                // Guardamos el estado de la sesión en localStorage
+                localStorage.setItem('usuarioLogueado', true);
                 // Redirigir a la página del catálogo
                 window.location.href = "catalogo.html"; // Cambia el nombre del archivo si es necesario
             } else {
