@@ -68,6 +68,7 @@
         button:hover {
             background-color: #45a049;
         }
+		
 
         .grid {
             display: grid;
@@ -178,6 +179,8 @@
             <h2>Valores publicados en dólares o cotización al Blue del día</h2>
         </div>
     </header>
+	
+	<button id="logout-btn">Cerrar sesión</button>  <!-- Botón de logout -->
 
     <div class="controls">
         <div class="controls-row">
@@ -269,6 +272,20 @@
                 console.error('Error al cargar los datos:', error);
                 document.querySelector('#error').textContent = error.message;
             });
+			
+			// Verificamos si el usuario está logueado al cargar la página
+			window.addEventListener('DOMContentLoaded', (event) => {
+            const usuarioLogueado = localStorage.getItem('usuarioLogueado');
+            if (!usuarioLogueado) {
+                window.location.href = 'index.html';  // Redirigimos al login si no está logueado
+			}
+			});
+
+			// Acción del botón de logout
+			document.getElementById('logout-btn').addEventListener('click', function() {
+            localStorage.removeItem('usuarioLogueado');
+            window.location.href = 'index.html';  // Redirigimos al login al cerrar sesión
+			});
 
         function mostrarPagina(pagina, datos = productos) {
             currentPage = pagina;
