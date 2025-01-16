@@ -32,6 +32,24 @@
             font-size: 18px;
         }
 
+        /* Estilos para el botón de cerrar sesión */
+        #logout-btn {
+            width: 70px;
+            height: 50px;
+            background-color: #45a049;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+
+        #logout-btn:hover {
+            background-color: #45a049;
+        }
+
         .controls {
             display: flex;
             flex-direction: column;
@@ -68,7 +86,6 @@
         button:hover {
             background-color: #45a049;
         }
-		
 
         .grid {
             display: grid;
@@ -178,9 +195,8 @@
             <h1>Catálogo Mundo Hogareño</h1>
             <h2>Valores publicados en dólares o cotización al Blue del día</h2>
         </div>
+        <button id="logout-btn">Cerrar Sesión</button>  <!-- Botón de logout -->
     </header>
-	
-	<button id="logout-btn">Cerrar sesión</button>  <!-- Botón de logout -->
 
     <div class="controls">
         <div class="controls-row">
@@ -296,6 +312,8 @@
 
             cargarGrid(datosPagina);
             actualizarPaginacion(pagina, datos);
+			
+			window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function cargarGrid(data) {
