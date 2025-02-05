@@ -74,36 +74,41 @@
         <p id="error-message" class="error"></p>
     </div>
 
-    <script>
-        // Credenciales codificadas en Base64
-        const USUARIO_CODIFICADO = "bWF5b3Jpc3Rh";
-        const CONTRASENA_CODIFICADA = "c2FyZ2VudG9jYWJyYWwxOTQ1"; // "1234"
+<script>
+    // Credenciales codificadas en Base64
+    const USUARIOS = [
+        { usuario: "bWF5b3Jpc3Rh", contrasena: "c2FyZ2VudG9jYWJyYWwxOTQ1" }, // mayorista
+        { usuario: "TWF5b3Jpc3Rh", contrasena: "c2FyZ2VudG9jYWJyYWwxOTQ1" }, // Mayorista
+        { usuario: "Y2xpZW50ZQ==", contrasena: "c2FyZ2VudG9jYWJyYWwxOTQ1" }, // cliente
+		{ usuario: "Q2xpZW50ZQ==", contrasena: "c2FyZ2VudG9jYWJyYWwxOTQ1" }  // Cliente
+    ];
 
-        function decodeBase64(codigo) {
-            return atob(codigo);
+    function decodeBase64(codigo) {
+        return atob(codigo);
+    }
+
+    document.getElementById("login-form").addEventListener("submit", function(event) {
+        event.preventDefault(); // Evitar el envío del formulario
+
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        // Verificar si las credenciales coinciden con algún usuario registrado
+        const usuarioValido = USUARIOS.some(user => 
+            username === decodeBase64(user.usuario) && password === decodeBase64(user.contrasena)
+        );
+
+        if (usuarioValido) {
+            // Guardamos el estado de la sesión en localStorage
+            localStorage.setItem('usuarioLogueado', true);
+            // Redirigir a la página del catálogo
+            window.location.href = "catalogo.html"; // Cambia el nombre del archivo si es necesario
+        } else {
+            // Mostrar mensaje de error
+            document.getElementById("error-message").textContent = "Usuario o contraseña incorrectos.";
         }
-
-        document.getElementById("login-form").addEventListener("submit", function(event) {
-            event.preventDefault(); // Evitar el envío del formulario
-
-            const username = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
-
-            // Decodificar y verificar credenciales
-            const usuarioCorrecto = decodeBase64(USUARIO_CODIFICADO);
-            const contrasenaCorrecta = decodeBase64(CONTRASENA_CODIFICADA);
-
-            if (username === usuarioCorrecto && password === contrasenaCorrecta) {
-                // Guardamos el estado de la sesión en localStorage
-                localStorage.setItem('usuarioLogueado', true);
-                // Redirigir a la página del catálogo
-                window.location.href = "catalogo.html"; // Cambia el nombre del archivo si es necesario
-            } else {
-                // Mostrar mensaje de error
-                document.getElementById("error-message").textContent = "Usuario o contraseña incorrectos.";
-            }
-        });
-    </script>
+    });
+</script>
 
 </body>
 </html>
