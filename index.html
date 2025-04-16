@@ -101,8 +101,8 @@
     document.getElementById("login-form").addEventListener("submit", function(event) {
         event.preventDefault(); // Evitar el envío del formulario
 
-        const username = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value.trim();
 
         // Verificar si las credenciales coinciden con algún usuario registrado
         const usuarioValido = USUARIOS.some(user => 
