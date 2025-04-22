@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        header h2 {
+            margin: 10px;
+            font-size: 18px;
+        }
+
+        /* Estilos para el botón de cerrar sesión */
+        #logout-btn {
+            width: 70px;
+            height: 50px;
+            background-color: #45a049;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+
+        #logout-btn:hover {
+            background-color: #45a049;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin: 20px auto;
+            max-width: 90%;
+        }
+
+        .controls-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 5px;
+        }
+
+        select, input, button {
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        select, input {
+            width: 60%;
+        }
+
+        button {
+            width: 30%;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .grid {
+            display: grid;
+            gap: 14px;
+            padding: 14px;
+            justify-content: center;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        .card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            text-align: center;
+        }
+
+        .card img {
+            max-width: 100%;
+            max-height: 180px;
+            margin: 10px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .card img:hover {
+            transform: scale(1.1);
+        }
+
+        .card .info {
+            display: flex;
+            justify-content: center;
+            font-size: 0.9em;
+            margin: 10px 0;
+        }
+
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox:target {
+            display: flex;
+        }
+
+        .lightbox .close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            gap: 10px;
+        }
+
+        .pagination span {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <h1>HomePoint - Catálogo Mayorista</h1>
+            <h2>Valores publicados en dólares o cotización al Blue del día</h2>
+        </div>
+        <button id="logout-btn">Cerrar Sesión</button>  <!-- Botón de logout -->
+    </header>
+
+    <div class="controls">
+        <div class="controls-row">
+            <select id="categorias">
+                <option value="todos">Todas las categorías</option>
+            </select>
+            <button id="novedades">Novedades</button>
+        </div>
+        <div class="controls-row">
+            <input type="text" id="buscar" placeholder="Buscar artículo...">
+            <button id="todos">Todos</button>
+        </div>
+    </div>
+
+    <p id="error" style="text-align: center; color: red; font-weight: bold;"></p>
+
+    <div class="grid" id="catalogo">
+        <!-- Los datos se cargarán aquí -->
+    </div>
+
+    <div class="pagination" id="pagination">
+        <!-- Controles de paginación -->
+    </div>
+
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+        <span class="close" onclick="closeLightbox(event)">x</span>
+        <img id="lightbox-img" src="" alt="Imagen ampliada">
+    </div>
+
+    <script>
+        const API_KEY = 'AIzaSyDwiZWDc66tv4usDIA-IreiJMLFuk0236Q';
+        const SPREADSHEET_ID = '16YHFq8NeGtN4Hxn82i-Lj3Kfz8FaC7JZRaxLVRmLEyM';
+        const RANGO = 'A2:E';
+        const ITEMS_PER_PAGE = 50;
+
+        let productos = [];
+        let currentPage = 1;
+
+        fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${RANGO}?key=${API_KEY}`)
+            .then(response => {
+                if (!response.ok) throw new Error(`Error al acceder a la API: ${response.statusText}`);
+                return response.json();
+            })
+            .then(data => {
+                const items = data.values;
+                if (!items || items.length === 0) throw new Error("No se encontraron datos en la hoja.");
+
+                productos = items;
+                mostrarPagina(1);
+
+                const categoriasSet = new Set(items.map(item => item[0]));
+                const selectCategorias = document.getElementById('categorias');
+                categoriasSet.forEach(categoria => {
+                    const option = document.createElement('option');
+                    option.value = categoria;
+                    option.textContent = categoria;
+                    selectCategorias.appendChild(option);
+                });
+
+                selectCategorias.addEventListener('change', () => {
+                    const categoria = selectCategorias.value;
+                    if (categoria === "todos") {
+                        mostrarPagina(1);
+                    } else {
+                        const filtrados = productos.filter(item => item[0] === categoria);
+                        mostrarPagina(1, filtrados);
+                    }
+                });
+
+                document.getElementById('buscar').addEventListener('input', (e) => {
+                    const query = e.target.value.toLowerCase();
+                    const filtrados = productos.filter(item => item[3].toLowerCase().includes(query));
+                    mostrarPagina(1, filtrados);
+                });
+
+                document.getElementById('novedades').addEventListener('click', () => {
+                    const novedades = [...productos]
+                        .sort((a, b) => b[2] - a[2])
+                        .slice(0, 20);
+                    cargarGrid(novedades);
+                    actualizarPaginacion(1, novedades);
+                });
+
+                document.getElementById('todos').addEventListener('click', () => {
+                    mostrarPagina(1);
+                });
+            })
+            .catch(error => {
+                console.error('Error al cargar los datos:', error);
+                document.querySelector('#error').textContent = error.message;
+            });
+			
+			// Verificamos si el usuario está logueado al cargar la página
+			window.addEventListener('DOMContentLoaded', (event) => {
+            const usuarioLogueado = localStorage.getItem('usuarioLogueado');
+            if (!usuarioLogueado) {
+                window.location.href = 'index.html';  // Redirigimos al login si no está logueado
+			}
+			});
+
+			// Acción del botón de logout
+			document.getElementById('logout-btn').addEventListener('click', function() {
+            localStorage.removeItem('usuarioLogueado');
+            window.location.href = 'index.html';  // Redirigimos al login al cerrar sesión
+			});
+
+        function mostrarPagina(pagina, datos = productos) {
+            currentPage = pagina;
+            const totalPaginas = Math.ceil(datos.length / ITEMS_PER_PAGE);
+            const inicio = (pagina - 1) * ITEMS_PER_PAGE;
+            const fin = inicio + ITEMS_PER_PAGE;
+            const datosPagina = datos.slice(inicio, fin);
+
+            cargarGrid(datosPagina);
+            actualizarPaginacion(pagina, datos);
+			
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function cargarGrid(data) {
+            const grid = document.getElementById('catalogo');
+            grid.innerHTML = '';
+
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+
+                const articulo = document.createElement('h3');
+                articulo.textContent = item[3];
+                card.appendChild(articulo);
+
+                if (isValidImageUrl(item[1])) {
+                    const img = document.createElement('img');
+                    img.src = item[1];
+                    img.addEventListener('click', () => {
+                        document.getElementById('lightbox-img').src = item[1];
+                        window.location.hash = 'lightbox';
+                    });
+                    card.appendChild(img);
+                }
+
+                const info = document.createElement('div');
+                info.classList.add('info');
+                info.textContent = `${item[0]} | Código: ${item[2]}`;
+                card.appendChild(info);
+
+                const valor = document.createElement('p');
+                valor.textContent = `Valor: ${item[4]}`;
+                card.appendChild(valor);
+
+                grid.appendChild(card);
+            });
+        }
+
+        function actualizarPaginacion(paginaActual, datos) {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+
+            const totalPaginas = Math.ceil(datos.length / ITEMS_PER_PAGE);
+
+            const paginaInfo = document.createElement('span');
+            paginaInfo.textContent = `Página ${paginaActual} de ${totalPaginas}`;
+            pagination.appendChild(paginaInfo);
+
+            if (paginaActual > 1) {
+                const btnAnterior = document.createElement('button');
+                btnAnterior.textContent = 'Anterior';
+                btnAnterior.addEventListener('click', () => mostrarPagina(paginaActual - 1, datos));
+                pagination.appendChild(btnAnterior);
+            }
+
+            if (paginaActual < totalPaginas) {
+                const btnSiguiente = document.createElement('button');
+                btnSiguiente.textContent = 'Siguiente';
+                btnSiguiente.addEventListener('click', () => mostrarPagina(paginaActual + 1, datos));
+                pagination.appendChild(btnSiguiente);
+            }
+        }
+
+        function isValidImageUrl(url) {
+            return url && url.match(/\.(jpeg|jpg|gif|png)$/i);
+        }
+
+        function closeLightbox(event) {
+            if (event.target === event.currentTarget || event.target.classList.contains('close')) {
+                window.location.hash = '';
+            }
+        }
+    </script>
+
+</body>
+</html>
