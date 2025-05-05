@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="favicon.png" type="image/png">
-    <title>Página Principal</title>
+    <link rel="icon" href="faviconnegro.png" type="image/png">
+    <title>Mayorista HomePoint</title>
     <style>
+
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -15,6 +16,7 @@
             margin: 0;
             background-color: #f9f9f9;
         }
+
         .container {
             text-align: center;
             background-color: #fff;
@@ -24,17 +26,21 @@
             width: 100%;
             max-width: 400px;
         }
+
         h1 {
             margin-bottom: 20px;
         }
+        
         img.logo {
             max-width: 250px;
             margin-bottom: 20px;
         }
+
         form {
             display: flex;
             flex-direction: column;
         }
+
         input[type="text"], input[type="password"] {
             padding: 10px;
             margin: 10px 0;
@@ -43,6 +49,7 @@
             width: 100%;
             box-sizing: border-box;
         }
+
         button {
             padding: 10px;
             background-color: #4CAF50;
@@ -51,9 +58,11 @@
             border-radius: 4px;
             cursor: pointer;
         }
+
         button:hover {
             background-color: #45a049;
         }
+
         .error {
             color: red;
             margin-top: 10px;
@@ -74,7 +83,6 @@
 <body>
 
     <div class="container">
-        <!-- Logo de la página -->
         <img src="logo.png" alt="Logo" class="logo">
         <h1>Bienvenido</h1>
         <p>Por favor, inicie sesión para continuar.</p>
@@ -87,12 +95,12 @@
     </div>
 
 <script>
-    // Credenciales codificadas en Base64
+    
     const USUARIOS = [
-        { usuario: "bWF5b3Jpc3Rh", contrasena: "c2FyZ2VudG9jYWJyYWwxOTQ1" }, // mayorista
-        { usuario: "TWF5b3Jpc3Rh", contrasena: "c2FyZ2VudG9jYWJyYWwxOTQ1" }, // Mayorista
-        { usuario: "Y2xpZW50ZQ==", contrasena: "c2FyZ2VudG9jYWJyYWwxOTQ1" }, // cliente
-		{ usuario: "Q2xpZW50ZQ==", contrasena: "c2FyZ2VudG9jYWJyYWwxOTQ1" }  // Cliente
+        { usuario: "bWF5b3Jpc3Rh", contrasena: "c2FyZ2VudG9jYWJyYWwxOTQ1" }, // 1
+        { usuario: "TWF5b3Jpc3Rh", contrasena: "c2FyZ2VudG9jYWJyYWwxOTQ1" }, // 1
+        { usuario: "Y2xpZW50ZQ==", contrasena: "c2FyZ2VudG9jYWJyYWwxOTQ1" }, // 2
+		{ usuario: "Q2xpZW50ZQ==", contrasena: "c2FyZ2VudG9jYWJyYWwxOTQ1" }  // 2
     ];
 
     function decodeBase64(codigo) {
