@@ -4,43 +4,43 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="icon" href="faviconnegro.png" type="image/png">
 	
     <title>Catálogo HomePoint</title>
 
     <script> // SOLO PARA MAYORISTA
-    // Verificamos si el usuario está logueado al cargar la página
-    window.addEventListener('DOMContentLoaded', (event) => {
-    const usuarioLogueado = localStorage.getItem('usuarioLogueado');
-    if (!usuarioLogueado) {
-        window.location.href = 'index.html';  // Redirigimos al login si no está logueado
-    }});
+        // Verificamos si el usuario está logueado al cargar la página
+        window.addEventListener('DOMContentLoaded', (event) => {
+        const usuarioLogueado = localStorage.getItem('usuarioLogueado');
+        if (!usuarioLogueado) {
+            window.location.href = 'index.html';  // Redirigimos al login si no está logueado
+        }});
     </script>
 	
     <style>
 	    
         body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-            color: #333;
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+        color: #333;
         }
 
         header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px;
-            background-color: #FFFFFF;
-            color: black;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+        background-color: #FFFFFF;
+        color: black;
         }
 
         header h1 {
-            margin: 0;
-            font-size: 14px;
-            font-style: italic; /* Pone el texto en cursiva */
-            margin-top: 13px; /* Espacio opcional con el logo */
+        margin: 0;
+        font-size: 14px;
+	    font-style: italic; /* Pone el texto en cursiva */
+	    margin-top: 13px; /* Espacio opcional con el logo */
         }
 		
         .controls {
@@ -137,10 +137,10 @@
         }
 
         .card h3 {
-            font-size: 16px; /* Ajusta el tamaño según lo necesites */
-            font-weight: bold; /* Opcional: para hacer el texto más grueso */
-            text-align: center; /* Opcional: Centra el texto */
-            color: #333; /* Opcional: Cambia el color si lo deseas */
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            color: #333;
         }
 
         .lightbox {
@@ -224,14 +224,14 @@
         }
 
         #cart-list li {
-            list-style-type: disc; /* Agrega viñetas a cada ítem */
-            margin-left: 20px; /* Espaciado para las viñetas */
+            list-style-type: disc;
+            margin-left: 20px;
         }
 
         .cart-container h3 {
-            font-size: 0px; /* Cambia el tamaño del texto */
-            font-weight: bold; /* Opcional: Hace el texto más grueso */
-            text-align: center; /* Opcional: Centra el texto */
+            font-size: 0px;
+            font-weight: bold;
+            text-align: center;
             margin-top: 0;
         }
 
@@ -322,8 +322,8 @@
 
 <header style="text-align: center; padding: 10px 20px; background-color: #FFFFFF; width: 85%; margin: 0 auto; border-radius: 10px; display: flex; justify-content: center; align-items: center; overflow: hidden;">
     <div style="white-space: nowrap; animation: marquee 15s linear infinite;">
-        <h1 style="font-size: 18px; font-style: italic; margin: 0; text-align: center; display: inline-block; color: #4CAF50;">
-            💲&nbsp; Valores publicados en dólares o cotización al Blue del día &nbsp;💲 <br>
+        <h1 style="font-size: 16px; font-style: italic; margin: 0; text-align: center; display: inline-block; color: #4CAF50;">
+            🏪&nbsp; Visita nuestro Showroom en Vicente López &nbsp;🛍️ &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;  🚚&nbsp; ENVÍOS A TODO EL PAÍS &nbsp;📦 <br>
         </h1>
     </div>
 </header>
@@ -370,9 +370,10 @@
 
     <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
         <span class="close" onclick="closeLightbox(event)">x</span>
-        <button id="prev-btn" style="position: absolute; left: 20px; top: 50%; transform:translateY(-50%); font-size:2em; background:none; border:none; color:rgb(138, 138, 138); display:none;">&#10094;</button>
+        <button id="prev-btn" style="position: absolute; left: 15px; top: 50%; transform:translateY(-70%); font-size:3em; background:none; border:none; color:#4CAF50; display:none;">&#10094;</button>
         <img id="lightbox-img" src="" alt="Imagen ampliada">
-        <button id="next-btn" style="position: absolute; right: 20px; top: 50%; transform:translateY(-50%); font-size:2em; background:none; border:none; color:rgb(138, 138, 138); display:none;">&#10095;</button>
+        <div id="lightbox-value" style="color: white; font-size: 1.5em; text-align: center; margin-top: 10px;"></div>
+        <button id="next-btn" style="position: absolute; right: 15px; top: 50%; transform:translateY(-70%); font-size:3em; background:none; border:none; color:#4CAF50; display:none;">&#10095;</button>
     </div>
 
     <!-- Contenedor del carrito de compras -->
@@ -409,7 +410,7 @@
                 // Filtrar para ocultar artículos con etiqueta "No disponible"
                 // y ordenar descendente por el código (índice 2)
                 productos = items
-                    .filter(item => item[4].toLowerCase() !== 'no disponible')
+                    .filter(item => item[5].toLowerCase() !== 'no disponible')
                     .sort((a, b) => parseInt(b[2]) - parseInt(a[2]));
                 
                 mostrarPagina(1);
@@ -436,7 +437,9 @@
 
                 document.getElementById('buscar').addEventListener('input', (e) => {
                     const query = e.target.value.toLowerCase();
-                    const filtrados = productos.filter(item => item[3].toLowerCase().includes(query));
+                    const filtrados = productos.filter(item => 
+                        item[3].toLowerCase().includes(query) || item[2].toLowerCase().includes(query)
+                    );
                     mostrarPagina(1, filtrados);
                 });
 
@@ -474,56 +477,113 @@
             grid.innerHTML = '';
 
             data.forEach(item => {
-                const card = document.createElement('div');
-                card.classList.add('card');
+            const card = document.createElement('div');
+            card.classList.add('card');
 
-                const articulo = document.createElement('h3');
-                articulo.textContent = item[3];
-                card.appendChild(articulo);
+            const articulo = document.createElement('h3');
+            articulo.textContent = item[3];
+            card.appendChild(articulo);
 
-                if (isValidImageUrl(item[1])) {
-                    let imageUrls = [];
-                    if (item[1].indexOf(',') !== -1) {
-                        imageUrls = item[1].split(',').map(url => url.trim());
-                    } else {
-                        imageUrls.push(item[1]);
+            if (isValidImageUrl(item[1])) {
+                let imageUrls = [];
+                if (item[1].indexOf(',') !== -1) {
+                imageUrls = item[1].split(',').map(url => url.trim());
+                } else {
+                imageUrls.push(item[1]);
+                }
+                
+                const img = document.createElement('img');
+                img.src = imageUrls[0];
+                img.onerror = function() {
+                this.src = 'no-disponible.png'; // Imagen de respaldo
+                };
+                img.addEventListener('click', () => {
+                abrirLightbox(imageUrls);
+                });
+                card.appendChild(img);
+            }
+
+            const info = document.createElement('div');
+            info.classList.add('info');
+            info.textContent = `${item[0]} | Código: ${item[2]}`;
+            card.appendChild(info);
+
+            const valor = document.createElement('p');
+            valor.innerHTML = `<strong>Valor:</strong> ${item[5]}`;
+            card.appendChild(valor);
+
+            // Contenedor para el selector de cantidad y el botón
+            const actionContainer = document.createElement('div');
+            actionContainer.style.display = 'flex';
+            actionContainer.style.alignItems = 'center';
+            actionContainer.style.justifyContent = 'center'; // Centrar horizontalmente
+            actionContainer.style.gap = '10px';
+
+            // Selector de cantidad
+            const cantidadSelector = document.createElement('input');
+            cantidadSelector.type = 'number';
+            cantidadSelector.min = '1';
+            cantidadSelector.value = ''; // Por defecto vacío
+            cantidadSelector.style.width = '35px';
+            cantidadSelector.style.height = '35px';
+            cantidadSelector.style.padding = '5px';
+            actionContainer.appendChild(cantidadSelector);
+
+            // Evento para actualizar la cantidad en el carrito al cambiar el selector
+            cantidadSelector.addEventListener('change', () => {
+                const nuevaCantidad = parseInt(cantidadSelector.value);
+                if (!isNaN(nuevaCantidad) && nuevaCantidad > 0) {
+                    const existe = carrito.find(item => item.nombre === articulo.textContent); // Usar el nombre del artículo
+                    if (existe) {
+                        existe.cantidad = nuevaCantidad; // Actualizar la cantidad en el carrito
+                        actualizarCarrito(); // Refrescar el carrito
                     }
-                    
-                    const img = document.createElement('img');
-                    img.src = imageUrls[0];
-                    img.onerror = function() {
-                        this.src = 'no-disponible.png'; // Imagen de respaldo
-                    };
-                    img.addEventListener('click', () => {
-                        abrirLightbox(imageUrls);
-                    });
-                    card.appendChild(img);
+                }
+            });
+
+            // Botón para agregar el artículo al carrito
+            const btnAgregar = document.createElement('button');
+            btnAgregar.innerHTML = '<i class="fas fa-cart-plus"></i>';
+            btnAgregar.style.padding = '10px 10px';  // Aumenta el espacio interno
+            btnAgregar.style.fontSize = '16px';     // Aumenta el tamaño del texto
+            btnAgregar.style.height = '50px';       // Ajusta la altura
+            btnAgregar.style.width = '50px';        // Ajusta el ancho
+            btnAgregar.addEventListener('click', () => {
+                let cantidad = parseInt(cantidadSelector.value);
+                if (isNaN(cantidad) || cantidad <= 0) {
+                    // Si el selector está vacío o tiene un valor inválido, lo establecemos en 1
+                    cantidad = 1;
+                    cantidadSelector.value = '1';
                 }
 
-                const info = document.createElement('div');
-                info.classList.add('info');
-                info.textContent = `${item[0]} | Código: ${item[2]}`;
-                card.appendChild(info);
+                const existe = carrito.find(item => item.nombre === articulo.textContent); // Usar el nombre del artículo
+                if (existe) {
+                    // Si el artículo ya existe, actualizamos la cantidad con el valor del selector
+                    existe.cantidad = cantidad;
+                } else {
+                    // Si no existe, lo agregamos al carrito
+                    agregarAlCarrito(articulo.textContent, item[5], cantidad);
+                }
 
-                const valor = document.createElement('p');
-                valor.innerHTML = `<strong>Valor USD:</strong> ${item[5]}`;
-                card.appendChild(valor);
-
-                // Botón para agregar el artículo al carrito
-				const btnAgregar = document.createElement('button');
-				btnAgregar.innerHTML = '<i class="fas fa-cart-plus"></i>';
-				btnAgregar.style.marginTop = '10px';
-				btnAgregar.style.padding = '10px 10px';  // Aumenta el espacio interno
-				btnAgregar.style.fontSize = '16px';     // Aumenta el tamaño del texto
-				btnAgregar.style.height = '50px';       // Ajusta la altura
-				btnAgregar.style.width = '50px';       // Ajusta el ancho
-				btnAgregar.addEventListener('click', () => {
-				agregarAlCarrito(item[3], item[4]);
-				});
-				card.appendChild(btnAgregar);
-
-                grid.appendChild(card);
+                actualizarCarrito(); // Refrescar el carrito
             });
+            actionContainer.appendChild(btnAgregar);
+
+            card.appendChild(actionContainer);
+            grid.appendChild(card);
+            });
+        }
+
+        function agregarAlCarrito(nombre, precio, cantidad) {
+            const existe = carrito.find(item => item.nombre === nombre);
+            if (existe) {
+                // Si el artículo ya existe, actualizamos la cantidad
+                existe.cantidad += cantidad;
+            } else {
+                // Si no existe, lo agregamos al carrito
+                carrito.push({ nombre, precio, cantidad });
+            }
+            actualizarCarrito();
         }
 
         function actualizarPaginacion(paginaActual, datos) {
@@ -628,13 +688,15 @@
         // Funciones del carrito de compras
 
         // Verifica que el mismo artículo no se agregue más de una vez
-        function agregarAlCarrito(nombre, precio) {
-            const existe = carrito.some(item => item.nombre === nombre);
+        function agregarAlCarrito(nombre, precio, cantidad) {
+            const existe = carrito.find(item => item.nombre === nombre);
             if (existe) {
-                alert('El artículo ya está en el carrito.');
-                return;
+                // Si el artículo ya existe, actualizamos la cantidad
+                existe.cantidad += cantidad;
+            } else {
+                // Si no existe, lo agregamos al carrito
+                carrito.push({ nombre, precio, cantidad });
             }
-            carrito.push({ nombre});
             actualizarCarrito();
         }
 
@@ -652,7 +714,7 @@
 
             carrito.forEach(item => {
                 let li = document.createElement('li');
-                li.textContent = `${item.nombre}`;
+                li.textContent = `${item.nombre} - Cantidad: ${item.cantidad}`;
                 cartList.appendChild(li);
             });
         }
@@ -664,7 +726,7 @@
             }
             let mensaje = "Hola, me interesan estos artículos:%0A";
             carrito.forEach(item => {
-                mensaje += `- ${item.nombre}%0A`;
+                mensaje += `- ${item.nombre} - Cantidad: ${item.cantidad}%0A`;
             });
             window.open(`https://api.whatsapp.com/send/?phone=5491121891006&text=${mensaje}&type=phone_number&app_absent=0`);
         }
