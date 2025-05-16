@@ -114,6 +114,13 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             padding: 15px;
             text-align: center;
+            width: 210px;         /* Fija el ancho */
+            min-height: 340px;    /* Fija la altura mínima */
+            max-height: 340px;    /* Fija la altura máxima */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-sizing: border-box;
         }
 
         .card img {
@@ -137,7 +144,7 @@
         }
 
         .card h3 {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: bold;
             text-align: center;
             color: #333;
