@@ -82,7 +82,7 @@
 
         .grid {
             display: grid;
-            gap: 14px;
+            gap: 10px;
             padding: 14px;
             justify-content: center;
             max-width: 90%;
@@ -411,7 +411,17 @@
                 // y ordenar descendente por el código (índice 2)
                 productos = items
                     .filter(item => item[4].toLowerCase() !== 'no disponible')
-                    .sort((a, b) => parseInt(b[2]) - parseInt(a[2]));
+                    .sort((a, b) => {
+                        // Primero, ordenar por código descendente
+                        const codeDiff = parseInt(b[2]) - parseInt(a[2]);
+                        if (codeDiff !== 0) return codeDiff;
+                        // Luego, los que tienen imagen "no-disponible.png" van al final
+                        const aNoDisponible = a[1] && a[1].trim().toLowerCase() === 'no-disponible.png';
+                        const bNoDisponible = b[1] && b[1].trim().toLowerCase() === 'no-disponible.png';
+                        if (aNoDisponible && !bNoDisponible) return 1;
+                        if (!aNoDisponible && bNoDisponible) return -1;
+                        return 0;
+                    });
                 
                 mostrarPagina(1);
 
@@ -509,11 +519,15 @@
             info.textContent = `${item[0]} | Código: ${item[2]}`;
             card.appendChild(info);
 
-            const valor = document.createElement('p');
-            valor.innerHTML = `<strong>Valor USD:</strong> ${item[5]}`;
-            card.appendChild(valor);
+            //--const valor = document.createElement('p'); // Minorista
+            //--valor.innerHTML = `<strong>Valor:</strong> ${item[4]}`;
+            //--card.appendChild(valor);
 
-            const valorPesos = document.createElement('p');
+            const valorUSD = document.createElement('p'); // Mayorista
+            valorUSD.innerHTML = `<strong>Valor USD:</strong> ${item[5]}`;
+            card.appendChild(valorUSD);
+
+            const valorPesos = document.createElement('p'); // Mayorista
             valorPesos.innerHTML = `<strong>Valor Pesos:</strong> ${item[6]}`;
             card.appendChild(valorPesos);
 
