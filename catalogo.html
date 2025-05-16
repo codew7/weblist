@@ -133,7 +133,7 @@
             display: flex;
             justify-content: center;
             font-size: 0.9em;
-            margin: 2px 0;
+            margin: 10px 0;
         }
 
         .card h3 {
@@ -410,16 +410,8 @@
                 // Filtrar para ocultar artículos con etiqueta "No disponible"
                 // y ordenar descendente por el código (índice 2)
                 productos = items
-    .filter(item => item[4].toLowerCase() !== 'no disponible')
-    .sort((a, b) => {
-        // Considera imagen válida solo si tiene extensión y no es vacía
-        const aHasImg = isValidImageUrl(a[1]);
-        const bHasImg = isValidImageUrl(b[1]);
-        if (aHasImg && !bHasImg) return -1;
-        if (!aHasImg && bHasImg) return 1;
-        // Si ambos tienen o no tienen imagen, ordenar por código descendente
-        return parseInt(b[2]) - parseInt(a[2]);
-    });
+                    .filter(item => item[4].toLowerCase() !== 'no disponible')
+                    .sort((a, b) => parseInt(b[2]) - parseInt(a[2]));
                 
                 mostrarPagina(1);
 
@@ -649,9 +641,7 @@
         }
 
         function isValidImageUrl(url) {
-            if (!url) return false;
-            if (url.trim() === '' || url.trim().toLowerCase() === 'no-disponible.png') return false;
-            return url.match(/\.(jpeg|jpg|gif|png)$/i);
+            return url && url.match(/\.(jpeg|jpg|gif|png)$/i);
         }
 
         function abrirLightbox(images) {
