@@ -137,13 +137,10 @@
         }
 
         .card h3 {
-            font-size: clamp(12px, 2vw, 16px);
+            font-size: 14px;
             font-weight: bold;
             text-align: center;
             color: #333;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
 
         .lightbox {
@@ -521,7 +518,7 @@
             card.appendChild(valorUSD);
 
             const valorPesos = document.createElement('p'); // Mayorista
-            valorPesos.innerHTML = `<strong>Valor Pesos:</strong> ${item[6]}`;
+            valorPesos.innerHTML = `<strong>Valor $:</strong> ${item[6]}`;
             card.appendChild(valorPesos);
 
             // Contenedor para el selector de cantidad y el botón
