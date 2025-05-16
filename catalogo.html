@@ -411,17 +411,7 @@
                 // y ordenar descendente por el código (índice 2)
                 productos = items
                     .filter(item => item[4].toLowerCase() !== 'no disponible')
-                    .sort((a, b) => {
-                        // Primero, ordenar por código descendente
-                        const codeDiff = parseInt(b[2]) - parseInt(a[2]);
-                        if (codeDiff !== 0) return codeDiff;
-                        // Luego, los que tienen imagen "no-disponible.png" van al final
-                        const aNoDisponible = a[1] && a[1].trim().toLowerCase() === 'no-disponible.png';
-                        const bNoDisponible = b[1] && b[1].trim().toLowerCase() === 'no-disponible.png';
-                        if (aNoDisponible && !bNoDisponible) return 1;
-                        if (!aNoDisponible && bNoDisponible) return -1;
-                        return 0;
-                    });
+                    .sort((a, b) => parseInt(b[2]) - parseInt(a[2]));
                 
                 mostrarPagina(1);
 
@@ -753,6 +743,10 @@
         function limpiarCarrito() {
             carrito = [];
             actualizarCarrito();
+            // Vaciar todos los inputs de cantidad
+            document.querySelectorAll('input[type="number"]').forEach(input => {
+                input.value = '';
+            });
         }
     </script>
 
