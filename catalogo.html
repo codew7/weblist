@@ -82,7 +82,7 @@
 
         .grid {
             display: grid;
-            gap: 14x;
+            gap: 14px;
             padding: 14px;
             justify-content: center;
             max-width: 90%;
@@ -255,6 +255,10 @@
             margin-bottom: 5px;
         }
 		
+		.valor-venta {
+    margin: 2px 0 !important; /* Reduce el espacio vertical */
+    font-size: 15px;
+}
     </style>
 </head>
 
@@ -514,10 +518,12 @@
             //--card.appendChild(valor);
 
             const valorUSD = document.createElement('p'); // Mayorista
+            valorUSD.className = 'valor-venta';
             valorUSD.innerHTML = `<strong>Valor USD:</strong> ${item[5]}`;
             card.appendChild(valorUSD);
 
             const valorPesos = document.createElement('p'); // Mayorista
+            valorPesos.className = 'valor-venta';
             valorPesos.innerHTML = `<strong>Valor Pesos:</strong> ${item[6]}`;
             card.appendChild(valorPesos);
 
