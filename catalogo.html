@@ -255,19 +255,6 @@
             margin-bottom: 5px;
         }
 		
-		.valor-venta {
-        margin: 10px 0 !important; /* Reduce el espacio vertical */
-        font-size: 16px;
-        }
-
-        .titulo-articulo {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: block;
-            width: 100%;
-            max-width: 100%;
-        }
     </style>
 </head>
 
@@ -494,7 +481,6 @@
             card.classList.add('card');
 
             const articulo = document.createElement('h3');
-            articulo.className = 'titulo-articulo'; // <--- agrega esta línea
             articulo.textContent = item[3];
             card.appendChild(articulo);
 
@@ -528,12 +514,10 @@
             //--card.appendChild(valor);
 
             const valorUSD = document.createElement('p'); // Mayorista
-            valorUSD.className = 'valor-venta';
             valorUSD.innerHTML = `<strong>Valor USD:</strong> ${item[5]}`;
             card.appendChild(valorUSD);
 
             const valorPesos = document.createElement('p'); // Mayorista
-            valorPesos.className = 'valor-venta';
             valorPesos.innerHTML = `<strong>Valor Pesos:</strong> ${item[6]}`;
             card.appendChild(valorPesos);
 
