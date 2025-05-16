@@ -386,7 +386,7 @@
     <script>
         const API_KEY = 'AIzaSyDwiZWDc66tv4usDIA-IreiJMLFuk0236Q';
         const SPREADSHEET_ID = '1cD50d0-oSTogEe9tYo9ABUSP1ONCy3SAV92zsYYIG84';
-        const RANGO = 'A2:F';
+        const RANGO = 'A2:G';
         const ITEMS_PER_PAGE = 30;
 
         let productos = [];
@@ -511,6 +511,10 @@
 
             const valor = document.createElement('p');
             valor.innerHTML = `<strong>Valor USD:</strong> ${item[5]}`;
+            card.appendChild(valor);
+
+            const valor = document.createElement('p');
+            valor.innerHTML = `<strong>Valor $:</strong> ${item[6]}`;
             card.appendChild(valor);
 
             // Contenedor para el selector de cantidad y el botón
