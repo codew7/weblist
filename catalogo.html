@@ -12,6 +12,8 @@
         // --- Agrega esto al inicio del script principal ---
         const WHATSAPP_URL = "https://api.whatsapp.com/send/?phone=5491121891007&text&type=phone_number&app_absent=0";
         const MARQUEE_TEXT = "💲&nbsp; Valores publicados en dólares o cotización al Blue del día &nbsp;💲";
+        const ITEMUSD = "5";
+        const ITEMPESOS = "6";
 
     </script>
 
@@ -519,12 +521,11 @@
             //--card.appendChild(valor);
 
             const valorUSD = document.createElement('p'); // Mayorista
-            valorUSD.innerHTML = ``;
-            //valorUSD.innerHTML = `<strong>Valor USD:</strong> ${item[5]}`;
+            valorUSD.innerHTML = `<strong>Valor USD</strong> ${item[ITEMUSD]}`;
             card.appendChild(valorUSD);
 
             const valorPesos = document.createElement('p'); // Mayorista
-            valorPesos.innerHTML = `<strong>Valor $:</strong> ${item[6]}`;
+            valorPesos.innerHTML = `<strong>Valor $</strong> ${item[ITEMPESOS]}`;
             card.appendChild(valorPesos);
 
             // Contenedor para el selector de cantidad y el botón
