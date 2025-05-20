@@ -20,27 +20,27 @@
     <style>
 	    
         body {
-        font-family: 'Arial', sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f5f5f5;
-        color: #333;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
         }
 
         header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 20px;
-        background-color: #FFFFFF;
-        color: black;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #FFFFFF;
+            color: black;
         }
 
         header h1 {
-        margin: 0;
-        font-size: 14px;
-	    font-style: italic; /* Pone el texto en cursiva */
-	    margin-top: 13px; /* Espacio opcional con el logo */
+            margin: 0;
+            font-size: 14px;
+            font-style: italic; /* Pone el texto en cursiva */
+            margin-top: 13px; /* Espacio opcional con el logo */
         }
 		
         .controls {
@@ -82,10 +82,10 @@
 
         .grid {
             display: grid;
-            gap: 14px;
+            gap: 10px;
             padding: 14px;
             justify-content: center;
-            max-width: 90%;
+            max-width: 94%;
             margin: 0 auto;
         }
 
@@ -137,7 +137,7 @@
         }
 
         .card h3 {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
             text-align: center;
             color: #333;
@@ -157,8 +157,8 @@
         }
 
         .lightbox img {
-            max-width: 90%;
-            max-height: 90%;
+            max-width: 80%;
+            max-height: 80%;
         }
 
         .lightbox:target {
@@ -386,7 +386,7 @@
     <script>
         const API_KEY = 'AIzaSyDwiZWDc66tv4usDIA-IreiJMLFuk0236Q';
         const SPREADSHEET_ID = '1cD50d0-oSTogEe9tYo9ABUSP1ONCy3SAV92zsYYIG84';
-        const RANGO = 'A2:F';
+        const RANGO = 'A2:G';
         const ITEMS_PER_PAGE = 30;
 
         let productos = [];
@@ -506,12 +506,20 @@
 
             const info = document.createElement('div');
             info.classList.add('info');
-            info.textContent = `${item[0]} | Código: ${item[2]}`;
+            info.textContent = `Código: ${item[2]}`;
             card.appendChild(info);
 
-            const valor = document.createElement('p');
-            valor.innerHTML = `<strong>Valor USD:</strong> ${item[5]}`;
-            card.appendChild(valor);
+            //--const valor = document.createElement('p'); // Minorista
+            //--valor.innerHTML = `<strong>Valor:</strong> ${item[4]}`;
+            //--card.appendChild(valor);
+
+            const valorUSD = document.createElement('p'); // Mayorista
+            valorUSD.innerHTML = `<strong>Valor USD:</strong> ${item[5]}`;
+            card.appendChild(valorUSD);
+
+            const valorPesos = document.createElement('p'); // Mayorista
+            valorPesos.innerHTML = `<strong>Valor $:</strong> ${item[6]}`;
+            card.appendChild(valorPesos);
 
             // Contenedor para el selector de cantidad y el botón
             const actionContainer = document.createElement('div');
@@ -735,6 +743,10 @@
         function limpiarCarrito() {
             carrito = [];
             actualizarCarrito();
+            // Vaciar todos los inputs de cantidad
+            document.querySelectorAll('input[type="number"]').forEach(input => {
+                input.value = '';
+            });
         }
     </script>
 

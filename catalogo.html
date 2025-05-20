@@ -8,6 +8,13 @@
 	
     <title>Catálogo HomePoint</title>
 
+    <script>
+        // --- Agrega esto al inicio del script principal ---
+        const WHATSAPP_URL = "https://api.whatsapp.com/send/?phone=5491121891007&text&type=phone_number&app_absent=0";
+        const MARQUEE_TEXT = "💲&nbsp; Valores publicados en dólares o cotización al Blue del día &nbsp;💲";
+
+    </script>
+
     <script> // SOLO PARA MAYORISTA
         // Verificamos si el usuario está logueado al cargar la página
         window.addEventListener('DOMContentLoaded', (event) => {
@@ -275,7 +282,7 @@
     <div style="text-align: center; font-size: 16px; font-style: italic; ">
         Distribuidora Mayorista & Minorista
     </div>
-    <a href="https://api.whatsapp.com/send/?phone=5491121891006&text&type=phone_number&app_absent=0" target="_blank" style="margin-top: 10px; position: relative;">
+    <a href="#" onclick="window.open(WHATSAPP_URL, '_blank')" target="_blank" style="margin-top: 10px; position: relative;">
         <img src="whatsapp.png" alt="WhatsApp" width="50" height="50" style="position: fixed; bottom: 30px; right: 20px; z-index: 1000; cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)';" onmouseout="this.style.transform='scale(1)';">
     </a>
 </header>
@@ -322,9 +329,7 @@
 
 <header style="text-align: center; padding: 10px 20px; background-color: #FFFFFF; width: 85%; margin: 0 auto; border-radius: 10px; display: flex; justify-content: center; align-items: center; overflow: hidden;">
     <div style="white-space: nowrap; animation: marquee 15s linear infinite;">
-        <h1 style="font-size: 18px; font-style: italic; margin: 0; text-align: center; display: inline-block; color: #4CAF50;">
-            💲&nbsp; Valores publicados en dólares o cotización al Blue del día &nbsp;💲 <br>
-        </h1>
+        <h1 id="marquee-text" style="font-size: 18px; font-style: italic; margin: 0; text-align: center; display: inline-block; color: #4CAF50;"></h1>
     </div>
 </header>
 
@@ -514,7 +519,8 @@
             //--card.appendChild(valor);
 
             const valorUSD = document.createElement('p'); // Mayorista
-            valorUSD.innerHTML = `<strong>Valor USD:</strong> ${item[5]}`;
+            valorUSD.innerHTML = ``;
+            //valorUSD.innerHTML = `<strong>Valor USD:</strong> ${item[5]}`;
             card.appendChild(valorUSD);
 
             const valorPesos = document.createElement('p'); // Mayorista
@@ -737,7 +743,7 @@
             carrito.forEach(item => {
                 mensaje += `- ${item.nombre} - Cantidad: ${item.cantidad}%0A`;
             });
-            window.open(`https://api.whatsapp.com/send/?phone=5491121891006&text=${mensaje}&type=phone_number&app_absent=0`);
+            window.open(`${WHATSAPP_URL}&text=${mensaje}`);
         }
         
         function limpiarCarrito() {
@@ -748,6 +754,10 @@
                 input.value = '';
             });
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('marquee-text').innerHTML = MARQUEE_TEXT;
+        });
     </script>
 
     <footer style="text-align: center; padding: 20px; background-color: #FFFFFF; width: 90%; margin: 20px auto; border-radius: 10px;">
