@@ -9,20 +9,20 @@
     <title>Catálogo HomePoint</title>
 
     <script>
-        // --- Agrega esto al inicio del script principal ---
-        const WHATSAPP_URL = "https://api.whatsapp.com/send/?phone=5491121891007&text&type=phone_number&app_absent=0";
+        const WHATSAPP_URL = "https://api.whatsapp.com/send/?phone=5491121891006&text&type=phone_number&app_absent=0";
+        //const WHATSAPP_URL = "https://api.whatsapp.com/send/?phone=5491154597288&text&type=phone_number&app_absent=0";
+
         const MARQUEE_TEXT = "💲&nbsp; Valores publicados en dólares o cotización al Blue del día &nbsp;💲";
-        const ITEMUSD = "5";
-        const ITEMPESOS = "6";
+        //const MARQUEE_TEXT = "🏪  Visita nuestro Showroom en Vicente López  🛍️    -    🚚  ENVÍOS A TODO EL PAÍS  📦";
 
-    </script>
+        const ITEMUSD = "5"; // 5 Mayor - blank Minor
+        const ITEMPESOS = "6"; // 6 Mayor - 4 Minor
 
-    <script> // SOLO PARA MAYORISTA
-        // Verificamos si el usuario está logueado al cargar la página
+        // Verifica Login
         window.addEventListener('DOMContentLoaded', (event) => {
         const usuarioLogueado = localStorage.getItem('usuarioLogueado');
         if (!usuarioLogueado) {
-            window.location.href = 'index.html';  // Redirigimos al login si no está logueado
+            window.location.href = 'index.html';  // Redirige al login si no está logueado
         }});
     </script>
 	
@@ -48,8 +48,8 @@
         header h1 {
             margin: 0;
             font-size: 14px;
-            font-style: italic; /* Pone el texto en cursiva */
-            margin-top: 13px; /* Espacio opcional con el logo */
+            font-style: italic;
+            margin-top: 13px;
         }
 		
         .controls {
@@ -201,7 +201,7 @@
             background-color: #4CAF50;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s;
-            text-align: center; /* Centra el texto */
+            text-align: center;
         }
 
         .pagination-button:hover {
@@ -532,7 +532,7 @@
             const actionContainer = document.createElement('div');
             actionContainer.style.display = 'flex';
             actionContainer.style.alignItems = 'center';
-            actionContainer.style.justifyContent = 'center'; // Centrar horizontalmente
+            actionContainer.style.justifyContent = 'center';
             actionContainer.style.gap = '10px';
 
             // Selector de cantidad
@@ -612,7 +612,7 @@
             if (paginaActual > 1) {
                 const btnAnterior = document.createElement('button');
                 btnAnterior.textContent = 'Anterior';
-                btnAnterior.style.width = '100px'; // Define el ancho del botón
+                btnAnterior.style.width = '100px';
                 btnAnterior.addEventListener('click', () => mostrarPagina(paginaActual - 1, datos));
                 pagination.appendChild(btnAnterior);
             }
